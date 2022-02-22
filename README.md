@@ -45,7 +45,7 @@ ind_mat <- matrix(1:n_simu, nr = n_array, byr = T)
 
 ## `.R` file
 
-Save this file in your home directory as `my_simu.R`
+Save this file in your `$HOME` directory as `my_simu.R`
 
 ```R
 # define number of simulations and arrays
@@ -92,14 +92,14 @@ save(name_file, file=name_file)
 
 ## `.sh` file
 
-We define the file that will launch `my_simu.R` as `launch_my_simu.sh` and save it in your `$HOME` directory. 
+We define the file that will launch `my_simu.R`. Save this file in your `$HOME` directory as `launch_my_simu.sh`
 
 ```bash
 #!/bin/bash
 #SBATCH --job-name=my_simu
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=1:00:00
+#SBATCH --time=00:30:00
 #SBATCH --partition=public-cpu,public-bigmem,public-longrun-cpu,shared-cpu,shared-bigmem
 #SBATCH --mail-user=surname.name@unige.ch
 #SBATCH --mail-type=ALL
@@ -112,14 +112,65 @@ srun R CMD BATCH $INFILE $OUTFILE
 
 # The recombination and cleaning script
 
+The recombination and cleaning script performs the followng tasks:
+
+- recombine results from all arrays and save the complete matrix of results under `my_simu/mat_result_simulation_date_time.rda`
+- check if there are some simulation for which the resulting `.rda` file is not found and store a log under `my_simu/my_simu/failed_array_date_time.rda`
+- clean the `my_simu/data_temp` directory
+- clean the `my_simu/outfile` directory
+
 ## `.R` file
 
+Save this file in your `$HOME` directory as `recombine_and_clean_folders_my_simu.R`
 
 ```R
+# recombine all array jobs
+all_files = list.files(path = "my_simu/data_temp")
+mat_result_simulation = matrix(ncol=2)
+for(file_i in all_files){
+  file_name = paste0("my_simu/data_temp/",file_i)
+  load(file_name)
+  mat_result_simulation = rbind(mat_result_simulation, result_simulation_lmm)
+}
+mat_result_simulation = mat_result_simulation[-1,]
 
+# print dimension of matrix of results
+dim(mat_result_simulation)
+
+# save matrix of results
+time = Sys.time()
+time_2 = gsub(" ", "_", time)
+time_3 = gsub(":", "-", time_2)
+file_name_to_save = paste0(paste("my_simu/mat_result_simulation", time_3, sep="_"),
+                           ".rda")
+print(file_name_to_save)
+save(mat_result_simulation, file=file_name_to_save)
+
+# define function to check which files were not computed and save
+check_which_file_computed = function(directory, range, file_name, extension = ".rda"){
+  all_present_file = list.files(directory)
+  all_suposed_file = paste0(file_name, "_",range, extension)
+  not_found_file = all_suposed_file[which(!all_suposed_file %in% all_present_file)]
+  time = Sys.time()
+  time_2 = gsub(" ", "_", time)
+  time_3 = gsub(":", "-", time_2)
+  file_name = paste0(paste("my_simu/failed_array", time_3, sep="_"),
+                     ".rda")
+  write.table(x = not_found_file, file = file_name, sep="\t")
+}
+
+# check which files were not computed and save
+check_which_file_computed(directory="my_simu/data_temp", 
+                          range=1:1000, file_name = "my_simu_id")
+
+# delete all rda file and all outfile
+unlink("my_simu/data_temp/*", recursive = T, force = T)
+unlink("my_simu/outfile/*", recursive = T, force = T)
 ```
 
 ## `.sh` file
+
+Save this file in your `$HOME` directory as `launch_recombine_my_simu.sh`
 
 ```bash
 #!/bin/bash
@@ -132,11 +183,48 @@ srun R CMD BATCH $INFILE $OUTFILE
 #SBATCH --mail-type=ALL
 #SBATCH --output my_simu/outfile/outfile_recombine.out
 module load GCC/9.3.0 OpenMPI/4.0.3 R/4.0.0
-INFILE=recombine_and_clean_folders.R
+INFILE=recombine_and_clean_folders_my_simu.R
 OUTFILE=my_simu/report/recombine_and_clean_folders.Rout
 srun R CMD BATCH $INFILE $OUTFILE
-
 ```
 
 # Launching the simulation and recombination and cleaning script
+
+Launch the array job with
+
+```bash
+sbatch array=1-1000 launch_my_simu.sh
+```
+
+`slurm` will then retun something like:
+
+
+```out
+Submitted batch job 8602501
+```
+
+You then submit the recombination and cleaning script with
+
+```bash
+sbatch --dependency=afterany:8602501 launch_recombine_my_simu.sh 
+```
+
+**make sure to change the corresponding job id.**
+
+You can check if the array task is launched with:
+
+```bash
+squeue -u username
+```
+**make sure to change the corresponding username.**
+You should see something like:
+
+```out
+       8602501_995 shared-cp  my_simu username  R       0:05      1 cpu117
+       8602501_996 shared-cp  my_simu username  R       0:05      1 cpu117
+       8602501_997 shared-cp  my_simu username  R       0:05      1 cpu117
+       8602501_998 shared-cp  my_simu username  R       0:05      1 cpu117
+       8602501_999 shared-cp  my_simu username  R       0:05      1 cpu117
+      8602501_1000 shared-cp  my_simu username  R       0:05      1 cpu117
+```
 
