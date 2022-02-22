@@ -217,6 +217,7 @@ You can check if the array task is launched with:
 squeue -u username
 ```
 **make sure to change the corresponding username.**
+
 You should see something like:
 
 ```out
@@ -227,4 +228,7 @@ You should see something like:
        8602501_999 shared-cp  my_simu username  R       0:05      1 cpu117
       8602501_1000 shared-cp  my_simu username  R       0:05      1 cpu117
 ```
+
+That's it! You can now find your results under `my_simu`! :nerd_face: :sunglasses:
+
 
