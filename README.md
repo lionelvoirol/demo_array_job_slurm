@@ -4,7 +4,8 @@ Consider the task of launching a simulation study that repeats `n_simu` times a 
 
 # Notes
 
-- This tutorial is assuming that the user have a University of Geneva email adress.
+- This demo is assuming that the user have a University of Geneva email adress.
+- This demo is assuming that the user is using the University of Geneva's clusters `baobab` or `yggdrasil`.
 - All commands are assumed to be performed on a linux command line that have `slurm` installed.
 
 # Creating file tree
