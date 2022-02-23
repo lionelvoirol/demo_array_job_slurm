@@ -35,7 +35,7 @@ check_which_file_computed = function(directory, range, file_name, extension = ".
 
 # check which files were not computed and save
 check_which_file_computed(directory="my_simu/data_temp", 
-                          range=1:1000, file_name = "mat_results_id")
+                          range=1:100, file_name = "mat_results_id")
 
 # delete all rda file and all outfile
 # unlink("my_simu/data_temp/*", recursive = T, force = T)

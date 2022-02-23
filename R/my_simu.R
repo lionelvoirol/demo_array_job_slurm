@@ -1,6 +1,3 @@
-# clean ws
-rm(list=ls())
-
 # define number of simulations and arrays
 n_simu <- 100000
 n_array <- 100
