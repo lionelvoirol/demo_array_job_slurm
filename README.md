@@ -241,7 +241,7 @@ You should see something like:
       8602501_1000 shared-cp  my_simu username  R       0:05      1 cpu117
 ```
 
-That's it! Once all arrays of the simulation are computed, the recombination and cleaning script will be launched. YOu will then find your results under `my_simu`. More specifically, 
+That's it! Once all arrays of the simulation are computed, the recombination and cleaning script will be launched. You will then find your results under `my_simu`. More specifically, 
 
 - The matrix of all results under `my_simu/mat_result_simulation_date_time.rda`
 - The `.Rout` for all array job under `my_simu/report`
