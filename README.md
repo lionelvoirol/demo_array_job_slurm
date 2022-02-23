@@ -33,7 +33,6 @@ mkdir outfile
 
 We consider the simulation study of generating `n_simu` of a sample of size `sample_size` of $X_i$ where $X \sim \mathcal{N}(0,1)$ and computing the mle estimator of the mean and its standard deviation (using Bessel's bias correction).
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
 ## Organising simulation by array
 
