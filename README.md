@@ -33,7 +33,7 @@ mkdir outfile
 
 # The simulation
 
-We consider the simulation study of generating `n_simu` of a sample of size `sample_size` of ![formula](https://render.githubusercontent.com/render/math?math=\bbox[white]{X_i} ) where ![formula](https://render.githubusercontent.com/render/math?math=\bbox[white]{X\sim\mathcal{N}(0,1)} ) and computing the mle estimator of the mean and its standard deviation (using Bessel's bias correction).
+We consider the simulation study of generating `n_simu` of a sample of size `sample_size` of ![formula](https://render.githubusercontent.com/render/math?math=\bbox[white]{X_i} ) where ![formula](https://render.githubusercontent.com/render/math?math=\bbox[white]{X\sim\mathcal{N}(0,1)} ) and computing the mle estimator of the mean (![formula](https://render.githubusercontent.com/render/math?math=\bbox[white]{\bar{x}=\frac{1}{n}\left(\sum_{i=1}^{n} x_{i}\right)} ) ) and its standard deviation (using Bessel's bias correction).
 
 
 ## Organising simulation by array
