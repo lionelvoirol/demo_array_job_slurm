@@ -2,7 +2,7 @@
 #SBATCH --job-name=recombine_my_simu
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=00:30:00
+#SBATCH --time=00:10:00
 #SBATCH --partition=public-cpu,public-bigmem,public-longrun-cpu,shared-cpu,shared-bigmem
 #SBATCH --mail-user=lionel.voirol@unige.ch
 #SBATCH --mail-type=ALL

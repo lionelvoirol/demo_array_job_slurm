@@ -2,8 +2,8 @@
 rm(list=ls())
 
 # define number of simulations and arrays
-n_simu <- 10000
-n_array <- 1000
+n_simu <- 100000
+n_array <- 100
 
 # create matrix of indices
 ind_mat <- matrix(1:n_simu, nr = n_array, byr = T)
@@ -16,7 +16,7 @@ id_slurm <- as.numeric(id_slurm)
 id_simu <- ind_mat[id_slurm, ]
 
 # meta parameters
-sample_size = 1000
+sample_size = 100000
 verbose=T
 
 # define matrix of results
@@ -48,3 +48,11 @@ print(name_file)
 
 # save
 save(mat_results, file=name_file)
+
+
+
+# .Rprofile: Setting Switzerland repository
+# Error in load(name, envir = .GlobalEnv) :
+#   ReadItem: unknown type 0, perhaps written by later version of R
+# Calls: sys.load.image -> load
+# Execution halted
