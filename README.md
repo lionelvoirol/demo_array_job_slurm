@@ -99,15 +99,6 @@ print(name_file)
 
 # save
 save(mat_results, file=name_file)
-
-
-
-# .Rprofile: Setting Switzerland repository
-# Error in load(name, envir = .GlobalEnv) :
-#   ReadItem: unknown type 0, perhaps written by later version of R
-# Calls: sys.load.image -> load
-# Execution halted
-
 ```
 
 ## `.sh` file
