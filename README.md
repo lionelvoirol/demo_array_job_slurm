@@ -206,7 +206,7 @@ srun R CMD BATCH $INFILE $OUTFILE
 Launch the array job with
 
 ```bash
-sbatch array=1-100 launch_my_simu.sh
+sbatch --array=1-100 launch_my_simu.sh
 ```
 
 `slurm` will then retun something like:
