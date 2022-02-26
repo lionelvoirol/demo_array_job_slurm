@@ -12,7 +12,13 @@ Consider the task of launching a simulation study that repeats `n_simu` times a 
 
 # Creating file tree
 
-We create the following file tree in the `$HOME` directory.
+Locate your `$HOME` directory with:
+
+```bash
+echo $HOME
+```
+
+Create the following file tree in the `$HOME` directory.
 
 ```
 ├── my_simu
