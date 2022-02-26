@@ -8,7 +8,7 @@ You can find an introduction to High Performance Computing (HPC) and a Baobab He
 
 - [HPC User Documentation](https://doc.eresearch.unige.ch/hpc/start)
 - [Setting up `R` packages on `yggdrasil` or `baobab`](https://doc.eresearch.unige.ch/hpc/applications_and_libraries#r_project_and_rstudio)
-- [Web app to generate `.sh` scripts to launch job in `yggdrasil` or `baobab`](https://data-analytics-lab.shinyapps.io/golembash/) and its corresponding [Github repo](https://data-analytics-lab.shinyapps.io/golembash/) 
+- [Web app to generate `.sh` scripts to launch job in `yggdrasil` or `baobab`](https://data-analytics-lab.shinyapps.io/golembash/) and its corresponding [Github repo](https://github.com/SMAC-Group/hpc_util) 
 
 # Notes
 - This demo is assuming that the user is aiming to parallelize the execution of simulation study using `R`.
