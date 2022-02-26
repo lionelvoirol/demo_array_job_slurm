@@ -215,6 +215,19 @@ srun R CMD BATCH $INFILE $OUTFILE
 
 # Launching the simulation and recombination and cleaning script
 
+Make sure to have the following file tree before launching the simulation:
+
+```
+my_simu.R
+launch_my_simu.sh
+recombine_and_clean_folders_my_simu.R
+launch_recombine_my_simu.sh
+├── my_simu
+│   ├── data_temp
+│   ├── report
+│   ├── outfile
+```
+
 Launch the array job with
 
 ```bash
