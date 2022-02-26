@@ -1,13 +1,19 @@
 # Launching array job on a slurm HPC cluster
 
 
-
 Consider the task of launching a simulation study that repeats `n_simu` times a simulation that include a stochastic process and that save a given vector of results `theta`. One can efficiently parallelize such a simulation study using array jobs in a slurm cluster. [The Slurm Workload Manager](https://slurm.schedmd.com/documentation.html) , formerly known as Simple Linux Utility for Resource Management, or simply Slurm, is a free and open-source job scheduler for Linux and Unix-like kernels, used by many of the world's supercomputers and computer clusters. 
 
-# Notes
+# A note on High Performance Computing and parallelism
+You can find an introduction to High Performance Computing (HPC) and a Baobab Hello World [here](https://blog-dal.netlify.app/posts/baobab_hello_world/) as well as an introduction to parallel computing on `baobab` [here](https://blog-dal.netlify.app/posts/baobab_para/), on the [Data Analytics Lab's blog page](https://blog-dal.netlify.app/). Also find the various ressources:
 
-- This demo is assuming that the user have a University of Geneva email adress.
+- [HPC User Documentation](https://doc.eresearch.unige.ch/hpc/start)
+- [Setting up `R` packages on `yggdrasil` or `baobab`](https://doc.eresearch.unige.ch/hpc/applications_and_libraries#r_project_and_rstudio)
+- [Web app to generate `.sh` scripts to launch job in `yggdrasil` or `baobab`](https://data-analytics-lab.shinyapps.io/golembash/) and its corresponding [Github repo](https://data-analytics-lab.shinyapps.io/golembash/) 
+
+# Notes
+- This demo is assuming that the user is aiming to parallelize the execution of simulation study using `R`.
 - This demo is assuming that the user is using the University of Geneva's clusters `baobab` or `yggdrasil`.
+- This demo is assuming that the user have a University of Geneva email adress.
 - All commands are assumed to be performed on a linux command line that have `slurm` installed.
 
 # Creating file tree
@@ -44,7 +50,7 @@ We consider the simulation study of generating `n_simu` of a sample of size `sam
 
 ## Organising simulation by array
 
-Consider that you want to run `n_simu` simulations using `n_array` arrays. You create the matrix of simulation seeds with:
+Consider that you want to run `n_simu` simulations using `n_array` arrays. In order to generate reproducible results, you can set a simulation seed using `set.seed(i_seed)`. In order to perform a simulation study of `n_simu` simulations, you can generate `n_simu` seeds that you save in a   You create the matrix of simulation seeds with:
 
 ```R
 # define number of simulations and arrays
