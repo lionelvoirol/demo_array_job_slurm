@@ -238,16 +238,16 @@ sbatch --array=1-100 launch_my_simu.sh
 
 
 ```out
-Submitted batch job 8602501
+Submitted batch job job_id
 ```
 
 You then submit the recombination and cleaning script with
 
 ```bash
-sbatch --dependency=afterany:8602501 launch_recombine_my_simu.sh 
+sbatch --dependency=afterany:job_id launch_recombine_my_simu.sh 
 ```
 
-:warning: **make sure to change the corresponding job id.**
+:warning: **make sure to change the corresponding `job_id`.**
 
 You can check if the array task is launched with:
 
@@ -255,7 +255,7 @@ You can check if the array task is launched with:
 squeue -u username
 ```
 
-:warning: **make sure to change the corresponding username.**
+:warning: **make sure to change the corresponding `username`.**
 
 You should see something like:
 
