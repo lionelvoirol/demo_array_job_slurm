@@ -50,7 +50,7 @@ $$\hat{\mu} = \bar{x}=\frac{1}{n} \sum_{1=i}^n X_i$$
 
 and its standard deviation (using Bessel's bias correction) 
 
-$$\hat{\sigma}^2=\frac{1}{n-1} \sum_{1=i}^n (X_i-\bar{x})^2$$.
+$$\hat{\sigma}^2=\frac{1}{n-1} \sum_{1=i}^n (X_i-\bar{x})^2$$
 
 
 ## Organising simulation by array
