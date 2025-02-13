@@ -1,48 +1,40 @@
-# define number of simulations and arrays
-n_simu <- 100000
-n_array <- 100
+# clean ws
+rm(list=ls())
 
-# create matrix of indices
-ind_mat <- matrix(1:n_simu, nr = n_array, byr = T)
+# get environment variable
+n = as.numeric(Sys.getenv("n"))
 
-# get slurm array id and convert to numeric
-id_slurm <- Sys.getenv("SLURM_ARRAY_TASK_ID")
-id_slurm <- as.numeric(id_slurm)
+# set param
+mean = 10
+sd = 2
 
-# define id of simu to be run on array
-id_simu <- ind_mat[id_slurm, ]
+# get array job id environment variable
+id_slurm <- as.numeric(Sys.getenv("SLURM_ARRAY_TASK_ID"))
 
-# meta parameters
-sample_size = 100000
-verbose=T
+# set seed
+set.seed(123 + id_slurm)
 
-# define matrix of results
-mat_results = matrix(NA, ncol = 2, nrow=length(id_simu))
+# generate data
+data = rnorm(n = n, mean=mean, sd = sd)
+xbar = mean(data)
+sd_hat = sd(data)
 
-for(simu_index in seq(length(id_simu))){
-  # get seed 
-  i_seed=id_simu[simu_index]
-  # set seed
-  set.seed(i_seed)
-  # generate data
-  sample = rnorm(n = sample_size)
-  # compute theta
-  theta = c(mean(sample),
-            sd(sample))
-  # save in matrix
-  mat_results[simu_index, ] = theta
-  # print status if verbose
-  if(verbose & simu_index %% 2 == 0){
-    print(simu_index)
-  }
-}
+# create df
+df_to_save = data.frame(matrix(NA, ncol=6))
+colnames(df_to_save) = c("id_slurm","n","mu", "sd", "xbar", "sd_hat" )
 
-# define file name
-name_file <- paste0("my_simu/data_temp/", "mat_results", "_id_", id_slurm, ".rda")
+# save in df
+df_to_save[1,1] = id_slurm
+df_to_save[1,2] = n
+df_to_save[1,3] = mean
+df_to_save[1,4] = sd
+df_to_save[1,5] = xbar
+df_to_save[1,6] = sd_hat
 
-# print file name
-print(name_file)
+# save file for each simu
+file_name = paste0("demo_array_job_slurm/data_temp/", "results_my_simu_",id_slurm ,"_",n, ".rda")
+print(file_name)
+save(df_to_save, file = file_name)
 
-# save
-save(mat_results, file=name_file)
-
+# clean after simu
+rm(list=ls())
