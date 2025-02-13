@@ -51,7 +51,7 @@ We consider the simulation study of generating samples of $X_i$ where $X\sim \ma
 $$\hat{\mu} = \bar{x}=\frac{1}{n} \sum_{1=i}^n X_i$$ 
 
 
-and of the standard deviation
+and of the variance
 
 $$\hat{\sigma}^2=\frac{1}{n-1} \sum_{1=i}^n (X_i-\bar{x})^2$$
 

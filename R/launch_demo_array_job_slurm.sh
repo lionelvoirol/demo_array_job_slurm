@@ -1,10 +1,9 @@
 #!/bin/bash
 #SBATCH --partition=shared-cpu,shared-bigmem,public-cpu,public-bigmem,public-longrun-cpu
-#SBATCH --account=victoria
 #SBATCH --time=00-00:10:00
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks=1
-#SBATCH --mail-user=lionel.voirol@unige.ch
+#SBATCH --mail-user=your_email
 #SBATCH --job-name=demo_array_job_slurm
 #SBATCH --mail-type=NONE
 #SBATCH --output=/dev/null
