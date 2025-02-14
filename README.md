@@ -37,7 +37,7 @@ Create the following file tree in the `$HOME` directory.
 
 ```bash
 mkdir demo_array_job_slurm
-cd my_simu
+cd demo_array_job_slurm
 mkdir data_temp
 mkdir report
 mkdir outfile
@@ -129,7 +129,7 @@ exec > $OUTLOG 2>&1
 srun R CMD BATCH --no-save --no-restore $INFILE $OUTFILE
 ```
 
-Note that the flags `--no-save` and `--no-restore` are used to prevent errors such as:
+⚠️ Note that the flags `--no-save` and `--no-restore` are used to prevent errors such as:
 
 ```
 In load(name, envir = .GlobalEnv) :
@@ -240,7 +240,7 @@ demo_array_job_slurm/
 └── report
 ```
 
-Make sure you are root and launch the array job with
+Make sure you are root ($HOME) and launch the array job with
 
 ```bash
 ./demo_array_job_slurm/launch_all_demo_array_job_slurm.sh 
